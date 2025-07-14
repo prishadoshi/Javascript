@@ -10,7 +10,7 @@
 //porblem comes when we use scope
 // {} curly braces- are called scope
 
-var c=300;  //global scope
+var c=300;  //global scope, var-function scope
 let d=50;
 if (true){
     let a= 10;   //block scope- variables declared here should not be leaked outside
@@ -34,7 +34,9 @@ function one(){
 
     function two(){
         const website= "yt";
-        console.log(username);
+        console.log(username); //Functions are lexically scoped,
+        //which means:  Inner functions can access variables 
+        // from outer functions, but not the other way around.
     }
     //console.log(website); //ReferenceError: website is not defined
     two();
@@ -55,6 +57,10 @@ if (true) {
 
 
 //**********INTERESTING********
+
+// Function declarations (not expressions) are hoisted
+//  with their full definitions, 
+// so you can call them before their definition
 console.log( addOne(5)); //not give error
 function addOne(value){  //hoisting
     return value+1
@@ -68,6 +74,7 @@ const addTwo = function(num){    //Function Expression //variable can hold funct
 }
 addTwo(5);
 
+
 /*console.log(a); // undefined ✅ due to hoisting
 var a = 5;
 
@@ -76,3 +83,24 @@ let b = 10;
 Only var is hoisted with initialization (undefined).
 let and const are hoisted without initialization, causing the error.
 */
+
+//When you declare a variable with var, 
+// the declaration (not the assignment) is hoisted to the top of its scope.
+
+//Variables declared with let and const are also hoisted,
+//  but they are placed in a "Temporal Dead Zone" (TDZ) 
+// from the start of the block until the declaration is encountered. 
+// If you try to access them before declaration, you get a ReferenceError.
+//In memory, the variable b exists, but it’s in the TDZ 
+// and cannot be accessed until after the let b = 10 line.
+
+
+//var variables are hoisted and 
+// can be accessed before their declaration (though their value will be undefined until the line of assignment);
+// let and const variables are also hoisted 
+// but cannot be accessed before their declaration due to the TDZ(Temporal Dead Zone)
+
+// var allows re-declaration in the same scope, 
+// which can lead to unexpected behavior;
+//  let and const do not allow re-declaration in the same scope,
+//  preventing common errors.
