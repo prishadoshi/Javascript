@@ -39,6 +39,8 @@ const cha =()=>{
     console.log(this.username); //undefined
 }
 cha();
+//Arrow functions do not have their own this.
+// They inherit this from their surrounding (lexical) scope.
 
 //normal arrow function
 // const addTwo= (num1, num2) =>{
